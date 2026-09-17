@@ -2918,6 +2918,7 @@
 <input type="file" id="imageUploader" accept="image/*" style="display:none">
 <input type="file" id="fontFileUploader" accept=".ttf,.otf,.woff,.woff2" style="display:none">
 <input type="file" id="backupDataUploader" accept=".json" style="display:none">
+<input type="file" id="themePresetUploader" accept=".json" style="display:none">
 
 <div class="phone-frame" id="phoneFrame">
     <!-- 全局壁纸层（独立防边缘模糊外溢） -->
@@ -3427,13 +3428,37 @@
                 <button class="theme-btn primary" onclick="saveWallpaperSettings()">保存壁纸设置</button>
             </div>
 
-            <!-- 3. 外观主题预设（完整永久保存） -->
+            <!-- 3. 外观主题预设（完整永久保存与单独分享） -->
             <div class="theme-card">
-                <span class="theme-sec-title">外观主题预设（包含壁纸/字体/图标）</span>
+                <span class="theme-sec-title">外观主题预设与分享</span>
+                
+                <!-- 本地预设保存行 -->
                 <div style="display: flex; gap: 8px;">
                     <input type="text" class="theme-input" id="presetNameInput" placeholder="输入预设名称...">
                     <button class="theme-btn primary" style="flex: 0 0 auto; width: auto; padding: 0 16px;" onclick="saveCurrentPreset()">保存预设</button>
                 </div>
+
+                <!-- 导出与导入主题搭配独立操作栏 -->
+                <div style="display: flex; gap: 8px; margin-top: 2px;">
+                    <button class="theme-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 500;" onclick="exportCurrentThemePreset()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span>导出主题搭配</span>
+                    </button>
+                    
+                    <button class="theme-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 500;" onclick="triggerImportThemePreset()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>导入主题搭配</span>
+                    </button>
+                </div>
+
                 <div class="preset-chip-group" id="presetChipGroup">
                     <!-- 动态生成保存的预设 -->
                 </div>
@@ -5182,9 +5207,23 @@
 
     async function saveCurrentPreset() {
         const name = document.getElementById('presetNameInput').value.trim();
-        if (!name) return alert('请输入预设名称');
+        if (!name) return showGlassAlert("提示", "请输入预设名称！");
         const currentSavedIcons = (await dbGet('setting_custom_icons')) || {};
         const fontData = await dbGet('setting_font_data');
+
+        // 收集小组件图片与文字
+        const widgetImages = {};
+        const uploadableNodes = document.querySelectorAll('.uploadable-img');
+        for (let i = 0; i < uploadableNodes.length; i++) {
+            const saved = await dbGet(`avatar_slot_${i}`);
+            if (saved) widgetImages[i] = saved;
+        }
+
+        const widgetTexts = {};
+        document.querySelectorAll('.editable').forEach((el, idx) => {
+            const textKey = el.id ? `custom_text_${el.id}` : `custom_text_idx_${idx}`;
+            widgetTexts[textKey] = el.innerText;
+        });
 
         const presetData = {
             name: name,
@@ -5196,14 +5235,214 @@
             fontColor: document.getElementById('fontColorPicker').value,
             fontUrl: document.getElementById('fontUrlInput').value,
             fontData: fontData,
-            icons: currentSavedIcons
+            icons: currentSavedIcons,
+            widgetImages: widgetImages,
+            widgetTexts: widgetTexts
         };
 
         customPresets.push(presetData);
         await dbSet('setting_presets', customPresets);
         document.getElementById('presetNameInput').value = '';
         renderPresets();
-        alert('预设保存成功！');
+        showGlassAlert("保存成功", `本地主题预设【${name}】已保存！`);
+    }
+
+    // 1. 导出主题搭配（必须先设定主题名称，打包所有外观、组件图片与文字）
+    async function exportCurrentThemePreset() {
+        let themeName = document.getElementById('presetNameInput').value.trim();
+
+        const proceedExport = async (name) => {
+            if (!name || !name.trim()) {
+                return showGlassAlert("提示", "必须设定主题搭配名称后才可导出！");
+            }
+
+            const currentSavedIcons = (await dbGet('setting_custom_icons')) || {};
+            const fontData = await dbGet('setting_font_data');
+
+            // 打包所有小组件图片
+            const widgetImages = {};
+            const uploadableNodes = document.querySelectorAll('.uploadable-img');
+            for (let i = 0; i < uploadableNodes.length; i++) {
+                const img = uploadableNodes[i].querySelector('.custom-user-img');
+                const saved = await dbGet(`avatar_slot_${i}`);
+                if (saved) {
+                    widgetImages[i] = saved;
+                } else if (img && img.src && img.src.startsWith('data:')) {
+                    widgetImages[i] = img.src;
+                }
+            }
+
+            // 打包所有小组件修改过的文字
+            const widgetTexts = {};
+            document.querySelectorAll('.editable').forEach((el, idx) => {
+                const textKey = el.id ? `custom_text_${el.id}` : `custom_text_idx_${idx}`;
+                widgetTexts[textKey] = el.innerText;
+            });
+
+            const themePackage = {
+                type: 'Erjiji-Theme-Package',
+                version: '1.2.3',
+                themeName: name.trim(),
+                exportTime: Date.now(),
+                themeData: {
+                    name: name.trim(),
+                    isDark: document.getElementById('darkModeToggle').checked,
+                    wallpaper: activeWallpaper,
+                    blur: activeBlur,
+                    wpFit: activeWpFit,
+                    fontSize: document.getElementById('fontSizeSlider').value,
+                    fontColor: document.getElementById('fontColorPicker').value,
+                    fontUrl: document.getElementById('fontUrlInput').value,
+                    fontData: fontData,
+                    icons: currentSavedIcons,
+                    widgetImages: widgetImages,
+                    widgetTexts: widgetTexts
+                }
+            };
+
+            const jsonStr = JSON.stringify(themePackage, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const fileName = `Erjiji-Theme-${name.trim()}.json`;
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showGlassAlert("导出成功", `主题搭配【${name.trim()}】已导出为文件：\n${fileName}\n包含壁纸、字体、图标、小组件图片与自定义文案。`);
+        };
+
+        if (!themeName) {
+            showGlassPrompt("导出主题搭配", "请为这套主题搭配命名：", "输入主题名称...", (inputName) => {
+                if (inputName && inputName.trim()) {
+                    document.getElementById('presetNameInput').value = inputName.trim();
+                    proceedExport(inputName.trim());
+                } else {
+                    showGlassAlert("导出取消", "未填写主题名称，已取消导出。");
+                }
+            });
+        } else {
+            proceedExport(themeName);
+        }
+    }
+
+    // 2. 导入主题搭配（解析文件并应用到壁纸、字体、图标、组件图片与文字）
+    function triggerImportThemePreset() {
+        const uploader = document.getElementById('themePresetUploader');
+        uploader.onchange = function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                try {
+                    const parsed = JSON.parse(evt.target.result);
+                    const themeData = parsed.themeData || parsed;
+
+                    if (!themeData || (themeData.wallpaper === undefined && !themeData.icons && !themeData.widgetTexts)) {
+                        return showGlassAlert("导入失败", "无效的主题配置文件！");
+                    }
+
+                    const themeName = parsed.themeName || themeData.name || file.name.replace(/\.json$/i, '').replace(/^Erjiji-Theme-/, '');
+
+                    // 1. 应用暗黑模式
+                    if (themeData.isDark !== undefined) {
+                        document.getElementById('darkModeToggle').checked = themeData.isDark;
+                        toggleDarkMode(themeData.isDark);
+                    }
+
+                    // 2. 应用壁纸与模糊度
+                    activeWallpaper = themeData.wallpaper || '';
+                    activeBlur = themeData.blur || 0;
+                    activeWpFit = themeData.wpFit || 'cover';
+                    document.getElementById('blurSlider').value = activeBlur;
+                    document.getElementById('blurValText').innerText = `${activeBlur}px`;
+                    document.getElementById('wpFitSelect').value = activeWpFit;
+                    applyWallpaperStyle();
+                    await dbSet('setting_wallpaper', activeWallpaper);
+                    await dbSet('setting_wp_blur', activeBlur);
+                    await dbSet('setting_wp_fit', activeWpFit);
+
+                    // 3. 应用字体与字号
+                    if (themeData.fontSize) {
+                        changeGlobalFontSize(themeData.fontSize);
+                        document.getElementById('fontSizeSlider').value = themeData.fontSize;
+                    }
+                    if (themeData.fontColor) {
+                        changeFontColor(themeData.fontColor);
+                        document.getElementById('fontColorPicker').value = themeData.fontColor;
+                    }
+                    if (themeData.fontData) {
+                        applyFontBlob(themeData.fontData);
+                        await dbSet('setting_font_data', themeData.fontData);
+                    } else if (themeData.fontUrl) {
+                        applyFontUrl(themeData.fontUrl);
+                        document.getElementById('fontUrlInput').value = themeData.fontUrl;
+                    }
+
+                    // 4. 应用应用图标
+                    if (themeData.icons) {
+                        await dbSet('setting_custom_icons', themeData.icons);
+                        restoreCustomIcons(themeData.icons);
+                    }
+
+                    // 5. 还原所有小组件图片
+                    if (themeData.widgetImages) {
+                        const uploadableNodes = document.querySelectorAll('.uploadable-img');
+                        for (let slotIdx in themeData.widgetImages) {
+                            const imgUrl = themeData.widgetImages[slotIdx];
+                            const elem = uploadableNodes[slotIdx];
+                            if (elem && imgUrl) {
+                                let customImg = elem.querySelector('.custom-user-img');
+                                if (!customImg) {
+                                    customImg = document.createElement('img');
+                                    customImg.className = 'custom-user-img';
+                                    elem.appendChild(customImg);
+                                }
+                                customImg.src = imgUrl;
+                                elem.querySelectorAll('svg').forEach(svg => svg.style.display = 'none');
+                                elem.querySelectorAll('.placeholder-hide').forEach(el => el.style.display = 'none');
+                                await dbSet(`avatar_slot_${slotIdx}`, imgUrl);
+                            }
+                        }
+                    }
+
+                    // 6. 还原所有小组件文案
+                    if (themeData.widgetTexts) {
+                        const editableNodes = document.querySelectorAll('.editable');
+                        editableNodes.forEach((el, idx) => {
+                            const textKey = el.id ? `custom_text_${el.id}` : `custom_text_idx_${idx}`;
+                            if (themeData.widgetTexts[textKey] !== undefined) {
+                                const newTxt = themeData.widgetTexts[textKey];
+                                el.innerText = newTxt;
+                                el.dataset.userEdited = "true";
+                                localStorage.setItem(textKey, newTxt);
+                                dbSet(textKey, newTxt);
+                            }
+                        });
+                    }
+
+                    // 7. 自动收录为本地预设
+                    let localPresets = (await dbGet('setting_presets')) || [];
+                    localPresets = localPresets.filter(p => p.name !== themeName);
+                    localPresets.push({
+                        ...themeData,
+                        name: themeName
+                    });
+                    await dbSet('setting_presets', localPresets);
+                    renderPresets();
+
+                    showGlassAlert("导入成功", `主题搭配【${themeName}】已成功应用！\n壁纸、字体、图标、小组件图片与文案均已同步更新。`);
+                } catch(err) {
+                    showGlassAlert("导入错误", "解析主题文件失败: " + err.message);
+                }
+            };
+            reader.readAsText(file, 'utf-8');
+            uploader.value = '';
+        };
+        uploader.click();
     }
 
     async function applyPreset(p) {
