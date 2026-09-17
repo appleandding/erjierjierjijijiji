@@ -3,20 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>耳机机</title>
-
-    <!-- ================= PWA 桌面/屏幕安装配置 ================= -->
-    <meta name="application-name" content="耳机机">
-    <meta name="apple-mobile-web-app-title" content="耳机机">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#161719">
-
-    <!-- 桌面图标与苹果图标 -->
-    <link rel="icon" type="image/jpeg" href="https://image.58sb.cn/file/img/ggv6DdGS.jpg">
-    <link rel="apple-touch-icon" href="https://image.58sb.cn/file/img/ggv6DdGS.jpg">
-    <link rel="apple-touch-icon-precomposed" href="https://image.58sb.cn/file/img/ggv6DdGS.jpg">
+    <title>耳机耳机耳机机机机机机</title>
     <style>
 /* ================= 1. 纯净中性灰白变量（无蓝光、无蓝阴影） ================= */
         :root {
@@ -222,16 +209,24 @@
         }
         .page::-webkit-scrollbar { display: none; }
 
-        /* 通用磨砂玻璃卡片 */
+        /* 通用 iOS 液体微光玻璃卡片 */
         .glass-card {
-            background: var(--bg-surface);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.42);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             padding: 12px;
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8);
             transition: background 0.3s ease, border 0.3s ease;
+        }
+
+        .dark-mode .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
         }
 
         /* ================= 3. P1 组件（主页头像微缩精致化） ================= */
@@ -269,18 +264,21 @@
             margin: 4px 0 2px 0;
         }
 
+        /* P1 倾斜双胶囊条 iOS 液体微光玻璃质感 */
         .p1-slanted-pill {
             position: relative;
             height: 48px;
             border-radius: 26px;
-            background: var(--pill-top);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1.5px solid var(--border-glass-bright);
-            box-shadow: var(--shadow-card);
+            background: rgba(255, 255, 255, 0.42);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04), inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
             display: flex;
             align-items: center;
             padding: 0 10px;
+            transition: background 0.3s ease;
         }
 
         .p1-slanted-pill.top {
@@ -298,7 +296,14 @@
             margin-left: auto;
             justify-content: space-between;
             width: 96%;
-            background: var(--pill-bottom);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .dark-mode .p1-slanted-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
         }
 
         /* 主页气泡头像：小巧精致 30px */
@@ -342,8 +347,13 @@
         .pill-equalizer span:nth-child(2) { width: 8px; }
         .pill-equalizer span:nth-child(3) { width: 12px; }
 
-        /* Lora 卡片 */
+        /* Lora 卡片（完全透明背景，融入全屏壁纸） */
         .lora-card-wrap {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -375,19 +385,30 @@
             text-align: center;
         }
 
+        /* 初始应用图标 iOS 液体玻璃质感 */
         .app-icon {
             width: 54px;
             height: 54px;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
             transition: transform 0.15s ease, background 0.3s ease;
-            position: relative !important; /* 桌面图标也焊死在 54x54 内 */
+            position: relative !important;
             overflow: hidden !important;
+        }
+
+        .dark-mode .app-icon {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
         }
 
         .app-icon:active {
@@ -523,17 +544,20 @@
             border: none;
         }
 
+        /* P3 日记组件 iOS 液体微光玻璃质感 */
         .p3-diary-top-tab {
-            background: var(--bg-surface-elevated);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-glass-bright);
+            background: rgba(255, 255, 255, 0.48);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.95);
             border-bottom: none;
-            border-radius: 12px 12px 0 0;
+            border-radius: 16px 16px 0 0;
             padding: 6px 12px;
             display: flex;
             align-items: center;
             position: relative;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 0.85);
         }
 
         .p3-diary-tab-back {
@@ -554,16 +578,27 @@
         }
 
         .p3-diary-card-body {
-            background: var(--bg-surface);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-glass);
-            border-radius: 0 0 12px 12px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: none;
+            border-radius: 0 0 16px 16px;
             padding: 10px 12px 6px 12px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .dark-mode .p3-diary-top-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.14);
+            border-top-color: rgba(255, 255, 255, 0.25);
+        }
+        .dark-mode .p3-diary-card-body {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.14);
         }
 
         .p3-diary-author-row {
@@ -760,18 +795,28 @@
             flex-shrink: 0;
         }
 
+        /* P4 顶部搜索网址栏 iOS 液体微光玻璃质感 */
         .p4-url-bar {
             flex: 1;
-            height: 32px;
+            height: 34px;
             border-radius: 18px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-glass-bright);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.95);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 10px;
+            padding: 0 12px;
             font-size: 10.5px;
             color: var(--text-secondary);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+        }
+        .dark-mode .p4-url-bar {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.14);
+            border-top-color: rgba(255, 255, 255, 0.25);
         }
 
         .p4-url-wave {
@@ -890,23 +935,33 @@
             background: var(--text-primary);
         }
 
-        /* 底部固定 Dock 栏 */
+        /* 底部固定 Dock 栏（原生 iOS 浮动液体玻璃与安全区适配） */
         .dock-container {
-            padding: 0 16px max(14px, env(safe-area-inset-bottom, 14px)) 16px;
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-top: 4px;
+            padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
             z-index: 50;
             flex-shrink: 0;
         }
         .dock {
-            background: var(--dock-bg);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
-            border: 1px solid var(--border-glass-bright);
-            border-radius: 26px;
-            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(38px) saturate(200%);
+            -webkit-backdrop-filter: blur(38px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 8px 14px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+        }
+        .dark-mode .dock {
+            background: rgba(32, 33, 37, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), inset 0 1px 1.5px rgba(255, 255, 255, 0.15);
         }
         .dock .app-icon {
             width: 48px;
@@ -1893,6 +1948,41 @@
             stroke-width: 1.8;
         }
 
+        /* 聊天项左滑容器 */
+        .msg-swipe-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .msg-swipe-actions {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .msg-swipe-btn {
+            height: 100%;
+            padding: 0 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .msg-swipe-btn.pin { background: #5856d6; }
+        .msg-swipe-btn.mute { background: #ff9500; }
+        .msg-swipe-btn.del { background: #ff3b30; }
+
         .msg-chat-item {
             display: flex;
             align-items: center;
@@ -1903,7 +1993,9 @@
             border-radius: 16px;
             box-shadow: var(--shadow-card);
             cursor: pointer;
-            transition: background 0.15s;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background 0.15s;
         }
         .msg-chat-item:active {
             background: var(--bg-surface-press);
@@ -3277,7 +3369,7 @@
                 <div class="app-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
                 <span class="app-title editable" contenteditable="true">数据</span>
             </div>
-            <div class="app-item" onclick="openAnnouncementModal()">
+            <div class="app-item" onclick="openAnnouncementScreen()">
                 <div class="app-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
                 <span class="app-title editable" contenteditable="true">公告</span>
             </div>
@@ -3780,6 +3872,60 @@
         </div>
     </div>
 
+    <!-- ================= 公告 APP 全屏应用界面 ================= -->
+    <div class="contacts-overlay" id="announcementScreenOverlay" style="z-index: 100;">
+        <div class="theme-header">
+            <button class="theme-back-btn" onclick="closeAnnouncementScreen()">
+                <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <span class="theme-title">系统公告与协议</span>
+            <div style="width: 32px;"></div>
+        </div>
+
+        <!-- 顶部二级分类 -->
+        <div class="settings-tabs-nav" style="margin-top: 8px;">
+            <button class="settings-tab-btn active" id="annTabBtn_thoughts" onclick="switchAnnounceTab('thoughts')">耳机的碎碎念</button>
+            <button class="settings-tab-btn" id="annTabBtn_disclaimer" onclick="switchAnnounceTab('disclaimer')">用户协议与免责声明</button>
+        </div>
+
+        <div class="theme-body" style="padding-top: 4px;">
+            <!-- 1. 耳机的碎碎念 -->
+            <div id="annPane_thoughts" style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="theme-card">
+                    <span class="theme-sec-title">📝 耳机的碎碎念</span>
+                    <div style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+                        <div>其实这个机子只是半成品不是很好玩，UI也不是很好看。</div>
+                        <div>弹窗也不好看QAQ，会改的！</div>
+                        <div>冷耳机还有好多好多的灵感，但是都不知道能不能弄出来，就算弄出来感觉UI也不是很好看的那种。</div>
+                        <div>玩起来可能会觉得不好玩，感觉都看UI<br><span style="color: var(--text-tertiary);">（os耳机苦恼焦虑中。）</span></div>
+                        <div style="margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--border-subtle);">
+                            <div style="color: var(--text-primary); font-weight: 600;">关于是否可以二传给亲友玩：</div>
+                            <div>这个二传给亲友玩，我还没有想好。等我哪天想好了之后再说吧，现在是禁止二传的。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 用户协议与免责声明 -->
+            <div id="annPane_disclaimer" style="display: none; flex-direction: column; gap: 12px;">
+                <div class="theme-card">
+                    <span class="theme-sec-title">📜 用户协议与免责声明</span>
+                    <div style="font-size: 11.5px; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 10px; text-align: justify;">
+                        <div style="color: var(--text-primary); font-weight: 600;">【重要提示】</div>
+                        <div>在使用本工具（小手机）前，请仔细阅读本全部协议与免责声明。使用本工具即代表您已完整阅读、充分理解并同意接受本协议全部条款约束。</div>
+                        <div style="color: var(--text-primary); font-weight: 600;">一、内容责任归属</div>
+                        <div>1. 本工具仅为功能性工具载体，工具本身不主动创作、输出任何内容。所有由用户操作、调用自行配置的API所生成、编辑、输入、导出的全部内容，均为用户个人行为产生。</div>
+                        <div>2. 用户在工具内的全部操作行为、产生的各类内容所带来的一切后果、纠纷、投诉、侵权追责，全部由使用的用户本人独立承担。</div>
+                        <div style="color: var(--text-primary); font-weight: 600;">二、年龄准入要求</div>
+                        <div>1. 本工具仅限年满18周岁完全民事行为能力人员使用。未满18周岁人员禁止访问、禁止使用本工具全部功能。</div>
+                        <div style="color: var(--text-primary); font-weight: 600;">三、用户使用约束规范</div>
+                        <div>1. 本工具内容输出依托用户自己配置的第三方API接口，用户承诺不会利用本工具生成、制作、传播侵权内容、低俗、色情、暴力、违法违规的相关内容。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ================= MESSAGE APP 全屏应用主视口 ================= -->
     <div class="contacts-overlay" id="messageAppOverlay">
         <!-- 顶栏 -->
@@ -3973,9 +4119,9 @@
 
         <div class="theme-body" style="padding-top: 14px; gap: 14px;">
             <div class="theme-card">
-                <span class="theme-sec-title">💾 导出与备份全机数据</span>
+                <span class="theme-sec-title">导出与备份全机数据</span>
                 <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.45;">
-                    将当前系统的所有数据（Message 账号、联系人与人设设定、关系网、全局壁纸、字体、自定义图标、桌面编辑文字、API 配置等）打包导出为一个完整的 JSON 备份文件。
+                    将当前系统的所有数据（Message 账号、聊天记录、自定美化CSS、联系人、世界书、全局壁纸、字体、自定义图标、桌面文字、API 配置等）完整打包导出，可在任何浏览器导入恢复。
                 </p>
                 <button class="theme-btn primary" style="width: 100%; min-height: 38px;" onclick="exportAllDataJSON()">
                     <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -3984,9 +4130,9 @@
             </div>
 
             <div class="theme-card">
-                <span class="theme-sec-title">📥 导入与恢复数据</span>
+                <span class="theme-sec-title">导入与恢复数据</span>
                 <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.45;">
-                    选择之前导出的 JSON 备份文件，恢复所有数据并自动刷新界面。
+                    选择之前导出的 Erjiji-Phone 备份文件，无缝恢复所有数据并自动刷新界面。
                 </p>
                 <button class="theme-btn" style="width: 100%; min-height: 38px; border-color: var(--accent-blue); color: var(--accent-blue); font-weight: 600;" onclick="triggerImportDataJSON()">
                     <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
@@ -3995,7 +4141,7 @@
             </div>
 
             <div class="theme-card">
-                <span class="theme-sec-title" style="color: #ff3b30;">⚠️ 危险区域</span>
+                <span class="theme-sec-title" style="color: #ff3b30;">危险区域</span>
                 <p style="font-size: 11px; color: var(--text-secondary);">
                     一键清空本机所有自定义数据并恢复初始状态。请务必提前做好导出备份。
                 </p>
@@ -4135,26 +4281,34 @@
         </div>
     </div>
 
-    <!-- ================= 心声专属弹窗 (低饱和灰白极简拟态) ================= -->
+    <!-- ================= 心声专属弹窗 (支持当前心声与历史心声无缝切换) ================= -->
     <div class="person-modal-mask" id="charMonologueModal" style="z-index: 180;">
-        <div class="person-modal-box" style="align-items: center; text-align: center; padding: 22px 18px 16px 18px; gap: 10px; max-width: 290px; background: rgba(250, 250, 252, 0.95); backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 20px 45px rgba(0,0,0,0.18);">
-            <div class="img-gen-close" style="position: absolute; top: 12px; right: 12px;" onclick="closeCharMonologueModal()">×</div>
+        <div class="person-modal-box" style="align-items: center; text-align: center; padding: 18px 16px 14px 16px; gap: 8px; max-width: 300px; background: rgba(250, 250, 252, 0.96); backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 20px 45px rgba(0,0,0,0.18);">
+            <div class="img-gen-close" style="position: absolute; top: 10px; right: 10px;" onclick="closeCharMonologueModal()">×</div>
             
-            <!-- 一：char 头像 (居中) -->
-            <div id="monologueCharAvatar" style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-surface-elevated); border: 2.5px solid #ffffff; box-shadow: 0 4px 14px rgba(0,0,0,0.08); background-size: cover; background-position: center; margin-top: 2px;"></div>
+            <div id="monologueCharAvatar" style="width: 50px; height: 50px; border-radius: 50%; background: var(--bg-surface-elevated); border: 2px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background-size: cover; background-position: center;"></div>
+            <div style="font-size: 13px; font-weight: 600; color: #2c2d30;" id="monologueCharName">@角色名</div>
             
-            <!-- 二：@备注 / 真名 (居中) -->
-            <div style="font-size: 13.5px; font-weight: 600; color: #2c2d30; letter-spacing: 0.3px;" id="monologueCharName">@角色名</div>
-            
-            <!-- 三：低饱和灰白心声框 -->
-            <div style="width: 100%; background: #ededf0; border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 12px 14px; text-align: left; font-size: 12.5px; line-height: 1.55; color: #28292c; max-height: 200px; overflow-y: auto; word-break: break-word; box-sizing: border-box; box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);" id="monologueContentText">
-                心声内容加载中...
+            <!-- 当前与历史切换栏 -->
+            <div class="contacts-tab-toggle" style="width: 100%; margin: 2px 0;">
+                <button class="contacts-toggle-btn active" id="monoTab_current" onclick="switchMonoView('current')">此轮心声</button>
+                <button class="contacts-toggle-btn" id="monoTab_history" onclick="switchMonoView('history')">历史心声</button>
             </div>
 
-            <!-- 操作按钮组 -->
-            <div style="display: flex; gap: 8px; width: 100%; margin-top: 4px; box-sizing: border-box;">
-                <button class="theme-btn" style="flex: 1 1 50% !important; width: 50% !important; height: 36px !important; min-height: 36px !important; font-size: 12px; border-color: rgba(0,0,0,0.1); color: var(--text-secondary);" onclick="editCurrentMonologue()">修改心声</button>
-                <button class="theme-btn primary" style="flex: 1 1 50% !important; width: 50% !important; height: 36px !important; min-height: 36px !important; font-size: 12px; font-weight: 600 !important;" onclick="closeCharMonologueModal()">我知道了</button>
+            <!-- 1. 当前心声 -->
+            <div id="monoView_current" style="width: 100%; display: flex; flex-direction: column; gap: 8px;">
+                <div style="width: 100%; background: #ededf0; border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 10px 12px; text-align: left; font-size: 12px; line-height: 1.55; color: #28292c; max-height: 180px; overflow-y: auto; word-break: break-word; box-sizing: border-box;" id="monologueContentText">
+                    心声内容加载中...
+                </div>
+                <div style="display: flex; gap: 6px; width: 100%;">
+                    <button class="theme-btn" style="flex: 1; height: 34px;" onclick="editCurrentMonologue()">修改心声</button>
+                    <button class="theme-btn primary" style="flex: 1; height: 34px; font-weight: 600;" onclick="closeCharMonologueModal()">关闭</button>
+                </div>
+            </div>
+
+            <!-- 2. 历史心声列表 -->
+            <div id="monoView_history" style="width: 100%; display: none; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto; padding: 2px 0;">
+                <div id="monoHistoryListContainer" style="display: flex; flex-direction: column; gap: 6px; text-align: left;"></div>
             </div>
         </div>
     </div>
@@ -4735,49 +4889,6 @@
 </div>
 
 <script>
-    /* ================= 0. 自动注册 PWA 桌面独立 App 安装清单 (Chrome/Edge/手机通用) ================= */
-    (function initPWA() {
-        // 动态构建并注入标准 PWA Web Manifest (名称：耳机机，无边框独立运行)
-        const pwaManifestData = {
-            name: "耳机机",
-            short_name: "耳机机",
-            description: "耳机机专属手机微系统",
-            start_url: "./",
-            scope: "./",
-            display: "standalone",
-            orientation: "portrait",
-            background_color: "#161719",
-            theme_color: "#161719",
-            icons: [
-                {
-                    src: "https://image.58sb.cn/file/img/ggv6DdGS.jpg",
-                    sizes: "192x192 512x512",
-                    type: "image/jpeg",
-                    purpose: "any maskable"
-                }
-            ]
-        };
-
-        const blob = new Blob([JSON.stringify(pwaManifestData)], { type: 'application/manifest+json' });
-        const manifestUrl = URL.createObjectURL(blob);
-        const link = document.createElement('link');
-        link.rel = 'manifest';
-        link.href = manifestUrl;
-        document.head.appendChild(link);
-
-        // 注册静默 ServiceWorker，激活 Chrome 与 Edge 的官方安装横幅
-        if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-            const swCode = `
-                self.addEventListener('install', e => self.skipWaiting());
-                self.addEventListener('activate', e => self.clients.claim());
-                self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
-            `;
-            const swBlob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(swBlob);
-            navigator.serviceWorker.register(swUrl).catch(() => {});
-        }
-    })();
-
     /* ================= 1. IndexedDB 永久超大容量数据库系统 ================= */
     const DB_NAME = 'PhoneOS_Permanent_DB';
     const STORE_NAME = 'os_data';
@@ -5779,9 +5890,15 @@
     function openDataScreen() { if (dataAppOverlay) dataAppOverlay.classList.add('open'); }
     function closeDataScreen() { if (dataAppOverlay) dataAppOverlay.classList.remove('open'); }
 
-    // 1. 导出全机数据 JSON
+    // 1. 导出全机数据 JSON（前缀统一为 Erjiji-Phone，全量内存+存储同步互通打包）
     async function exportAllDataJSON() {
         await initDB();
+        
+        // 强制即时落盘当前内存状态
+        await syncSaveMsgAccounts();
+        await syncSaveChatData();
+        await syncSaveWorldBookData();
+
         const dbDump = await dbGetAllEntries();
         const localDump = {};
         for (let i = 0; i < localStorage.length; i++) {
@@ -5790,9 +5907,21 @@
         }
 
         const fullBackup = {
-            version: '1.1.1',
+            appName: 'Erjiji-Phone',
+            version: '1.2.3',
             timestamp: Date.now(),
             dateString: new Date().toLocaleString(),
+            data: {
+                messageAccounts: messageAccounts,
+                chatHistories: allChatHistories,
+                chatCustomProfiles: allChatCustomProfiles,
+                worldBookFolders: worldBookFolders,
+                globalWorldBookEntries: globalWorldBookEntries,
+                charList: charList,
+                npcList: npcList,
+                relationMap: relationMap,
+                customPresets: customPresets
+            },
             db: dbDump,
             local: localDump
         };
@@ -5801,17 +5930,21 @@
         const blob = new Blob([jsonStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        const fileName = `PhoneOS_Backup_${new Date().toISOString().slice(0, 10)}_${Date.now().toString().slice(-4)}.json`;
+        
+        const now = new Date();
+        const dateTag = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}_${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
+        const fileName = `Erjiji-Phone-${dateTag}.json`;
+        
         a.href = url;
         a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showGlassAlert("导出成功", `全机数据已成功导出为文件：\n${fileName}`);
+        showGlassAlert("导出成功", `全机完整数据已导出为文件：\n${fileName}\n支持在任意手机与浏览器直接导入恢复。`);
     }
 
-    // 2. 选择文件导入
+    // 2. 跨浏览器完整导入恢复
     function triggerImportDataJSON() {
         const uploader = document.getElementById('backupDataUploader');
         uploader.onchange = function(e) {
@@ -5821,27 +5954,46 @@
             reader.onload = async function(evt) {
                 try {
                     const parsed = JSON.parse(evt.target.result);
-                    if (!parsed.db && !parsed.local) {
+                    if (!parsed.db && !parsed.local && !parsed.data) {
                         return showGlassAlert("导入失败", "无效的备份文件格式！");
                     }
 
-                    // 写入 IndexedDB
+                    // 1. 恢复核心业务实体
+                    if (parsed.data) {
+                        if (parsed.data.messageAccounts) messageAccounts = parsed.data.messageAccounts;
+                        if (parsed.data.chatHistories) allChatHistories = parsed.data.chatHistories;
+                        if (parsed.data.chatCustomProfiles) allChatCustomProfiles = parsed.data.chatCustomProfiles;
+                        if (parsed.data.worldBookFolders) worldBookFolders = parsed.data.worldBookFolders;
+                        if (parsed.data.globalWorldBookEntries) globalWorldBookEntries = parsed.data.globalWorldBookEntries;
+                        if (parsed.data.charList) charList = parsed.data.charList;
+                        if (parsed.data.npcList) npcList = parsed.data.npcList;
+                        if (parsed.data.relationMap) relationMap = parsed.data.relationMap;
+                        if (parsed.data.customPresets) customPresets = parsed.data.customPresets;
+                    }
+
+                    // 2. 写入 IndexedDB 数据库
                     if (parsed.db) {
                         for (let k in parsed.db) {
                             await dbSet(k, parsed.db[k]);
                         }
                     }
 
-                    // 写入 localStorage
+                    // 3. 写入 localStorage 存储
                     if (parsed.local) {
                         for (let k in parsed.local) {
                             try { localStorage.setItem(k, parsed.local[k]); } catch(e) {}
                         }
                     }
 
-                    showGlassAlert("恢复成功", "数据已成功导入并恢复！系统将自动重载界面。", async () => {
+                    // 4. 双向同步保存并重载界面
+                    await syncSaveMsgAccounts();
+                    await syncSaveChatData();
+                    await syncSaveWorldBookData();
+
+                    showGlassAlert("恢复成功", "数据已成功跨浏览器导入并恢复！正在重载应用...", async () => {
                         await restoreAllPersistentData();
                         closeDataScreen();
+                        renderMessageUI();
                     });
                 } catch(err) {
                     showGlassAlert("导入错误", "解析备份文件失败: " + err.message);
@@ -6599,7 +6751,7 @@
 
         const myContactsIds = currentMsgAccount.contacts || [];
         const allSystemChars = [...charList, ...npcList];
-        const myChars = allSystemChars.filter(c => myContactsIds.includes(c.id));
+        let myChars = allSystemChars.filter(c => myContactsIds.includes(c.id));
 
         if (myChars.length === 0) {
             const emptyTip = `
@@ -6614,32 +6766,109 @@
             return;
         }
 
+        // 置顶排序逻辑
+        myChars.sort((a, b) => {
+            const pA = getChatCustomProfile(a.id).isPinned ? 1 : 0;
+            const pB = getChatCustomProfile(b.id).isPinned ? 1 : 0;
+            return pB - pA;
+        });
+
         myChars.forEach((ch) => {
             const customProfile = getChatCustomProfile(ch.id);
             const displayName = customProfile.remark || ch.name;
             const displayAvatar = customProfile.charAvatar || ch.avatar;
             const displayAvatarStyle = displayAvatar ? `background-image:url('${displayAvatar}')` : '';
+            const isPinned = !!customProfile.isPinned;
+            const isMuted = !!customProfile.isMuted;
+
+            // 聊天列表项（带左滑菜单）
+            const swipeWrap = document.createElement('div');
+            swipeWrap.className = 'msg-swipe-wrapper';
+
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'msg-swipe-actions';
+            actionsDiv.innerHTML = `
+                <button class="msg-swipe-btn pin">${isPinned ? '取消置顶' : '置顶'}</button>
+                <button class="msg-swipe-btn mute">${isMuted ? '允许提醒' : '免打扰'}</button>
+                <button class="msg-swipe-btn del">删除</button>
+            `;
 
             const item = document.createElement('div');
             item.className = 'msg-chat-item';
+            if (isPinned) item.style.background = 'rgba(120, 120, 128, 0.12)';
+
             item.innerHTML = `
                 <div class="msg-item-avatar" style="${displayAvatarStyle}">
                     ${!displayAvatar ? '<svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' : ''}
                 </div>
                 <div class="msg-item-info">
                     <div class="msg-item-name-row">
-                        <span class="msg-item-name">${displayName}</span>
-                        <span class="msg-item-time">在线</span>
+                        <span class="msg-item-name">${displayName} ${isPinned ? '📌' : ''}</span>
+                        <span class="msg-item-time">${isMuted ? '🔕' : '在线'}</span>
                     </div>
                     <div class="msg-item-preview">${getLastChatPreview(ch.id) || '点击发起对话'}</div>
                 </div>
             `;
-            item.onclick = () => openChatScreen(ch);
-            
-            const contactClone = item.cloneNode(true);
-            contactClone.onclick = () => openChatScreen(ch);
-            contactWrap.appendChild(contactClone);
-            chatWrap.appendChild(item);
+
+            // 左滑触摸监听
+            let startX = 0, currentMoveX = 0;
+            item.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            item.addEventListener('touchmove', (e) => {
+                const diff = e.touches[0].clientX - startX;
+                if (diff < 0 && diff > -180) {
+                    item.style.transform = `translateX(${diff}px)`;
+                }
+            }, { passive: true });
+
+            item.addEventListener('touchend', (e) => {
+                const diff = e.changedTouches[0].clientX - startX;
+                if (diff < -50) {
+                    item.style.transform = 'translateX(-165px)';
+                } else {
+                    item.style.transform = 'translateX(0px)';
+                }
+            });
+
+            item.onclick = () => {
+                if (item.style.transform && item.style.transform !== 'translateX(0px)') {
+                    item.style.transform = 'translateX(0px)';
+                    return;
+                }
+                openChatScreen(ch);
+            };
+
+            // 操作按键事件
+            actionsDiv.querySelector('.pin').onclick = async (e) => {
+                e.stopPropagation();
+                customProfile.isPinned = !customProfile.isPinned;
+                await syncSaveChatData();
+                renderMsgContactsAndChats();
+            };
+            actionsDiv.querySelector('.mute').onclick = async (e) => {
+                e.stopPropagation();
+                customProfile.isMuted = !customProfile.isMuted;
+                await syncSaveChatData();
+                renderMsgContactsAndChats();
+            };
+            actionsDiv.querySelector('.del').onclick = async (e) => {
+                e.stopPropagation();
+                currentMsgAccount.contacts = (currentMsgAccount.contacts || []).filter(id => id !== ch.id);
+                await syncSaveMsgAccounts();
+                renderMsgContactsAndChats();
+            };
+
+            swipeWrap.appendChild(actionsDiv);
+            swipeWrap.appendChild(item);
+            chatWrap.appendChild(swipeWrap);
+
+            // 通讯录简单列表克隆
+            const contactItem = item.cloneNode(true);
+            contactItem.style.transform = 'none';
+            contactItem.onclick = () => openChatScreen(ch);
+            contactWrap.appendChild(contactItem);
         });
     }
 
@@ -6682,8 +6911,9 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
         document.getElementById('chatScreenOverlay').classList.add('open');
 
         const input = document.getElementById('chatInputText');
+        // 支持软键盘与各类回车编码（keyCode 13）无缝触发
         input.onkeydown = (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.keyCode === 13) {
                 e.preventDefault();
                 sendUserChatMessage();
             }
@@ -6728,17 +6958,7 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
                 row.style.marginTop = '-3px'; // 承接消息紧凑贴合
             }
 
-            // 多选 Checkbox
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'chat-select-checkbox';
-            checkbox.checked = selectedMsgIndices.has(msgIdx);
-            checkbox.onchange = (e) => {
-                if (e.target.checked) selectedMsgIndices.add(msgIdx);
-                else selectedMsgIndices.delete(msgIdx);
-                updateMultiSelectCount();
-            };
-            row.appendChild(checkbox);
+            // 单条气泡粒度的独立选择逻辑移至气泡层渲染
 
             const avatar = msg.role === 'user' ? userAvatar : charAvatar;
             const avatarElem = document.createElement('div');
@@ -6767,9 +6987,27 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
                 const transferCard = createTransferBubble(msg, msgIdx);
                 colElem.appendChild(transferCard);
             } else {
-                // 普通气泡
+                // 普通气泡（支持单气泡精准多选）
                 const bubbles = Array.isArray(msg.bubbles) ? msg.bubbles : [msg.text || ''];
                 bubbles.forEach((bText, bIdx) => {
+                    const bubbleWrap = document.createElement('div');
+                    bubbleWrap.style.cssText = "display: flex; align-items: center; gap: 6px; width: 100%;" + (msg.role === 'user' ? 'justify-content: flex-end;' : 'justify-content: flex-start;');
+
+                    const bubbleKey = `${msgIdx}_${bIdx}`;
+                    if (isMultiSelectMode) {
+                        const cb = document.createElement('input');
+                        cb.type = 'checkbox';
+                        cb.className = 'chat-select-checkbox';
+                        cb.style.display = 'block';
+                        cb.checked = selectedMsgIndices.has(bubbleKey);
+                        cb.onchange = (e) => {
+                            if (e.target.checked) selectedMsgIndices.add(bubbleKey);
+                            else selectedMsgIndices.delete(bubbleKey);
+                            updateMultiSelectCount();
+                        };
+                        if (msg.role === 'char') bubbleWrap.appendChild(cb);
+                    }
+
                     const bubble = document.createElement('div');
                     bubble.className = 'chat-bubble';
 
@@ -6778,6 +7016,23 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
                     spanText.style.position = 'relative';
                     spanText.style.zIndex = '1';
                     bubble.appendChild(spanText);
+
+                    if (isMultiSelectMode && msg.role === 'user') {
+                        const cb = document.createElement('input');
+                        cb.type = 'checkbox';
+                        cb.className = 'chat-select-checkbox';
+                        cb.style.display = 'block';
+                        cb.checked = selectedMsgIndices.has(bubbleKey);
+                        cb.onchange = (e) => {
+                            if (e.target.checked) selectedMsgIndices.add(bubbleKey);
+                            else selectedMsgIndices.delete(bubbleKey);
+                            updateMultiSelectCount();
+                        };
+                        bubbleWrap.appendChild(bubble);
+                        bubbleWrap.appendChild(cb);
+                    } else {
+                        bubbleWrap.appendChild(bubble);
+                    }
 
                     // 长按触发悬浮菜单 (重回 / 修改 / 删除 / 多选)
                     let pressTimer = null;
@@ -6990,12 +7245,42 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
         document.getElementById('chatQuoteBar').classList.remove('show');
     }
 
-    // ================= 长按气泡悬浮菜单逻辑 (重回/修改/删除/多选) =================
+    // ================= 长按气泡悬浮菜单逻辑 (按角色区分菜单) =================
     function openBubbleContextMenu(rect, msgIdx, bubbleIdx, role, text) {
         activeLongPressContext = { msgIdx, bubbleIdx, role, text };
         const menu = document.getElementById('bubbleContextMenu');
+        
+        // 动态构建长按菜单：Char 拥有【重回】，User 则只有【修改、多选、删除】
+        let menuHtml = '';
+        if (role === 'char') {
+            menuHtml += `
+                <div class="bubble-menu-item" onclick="triggerMenuAction('reReply')">
+                    <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                    <span>重回</span>
+                </div>
+                <div class="bubble-menu-divider"></div>
+            `;
+        }
+        menuHtml += `
+            <div class="bubble-menu-item" onclick="triggerMenuAction('edit')">
+                <svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                <span>修改</span>
+            </div>
+            <div class="bubble-menu-divider"></div>
+            <div class="bubble-menu-item" onclick="triggerMenuAction('multiSelect')">
+                <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                <span>多选</span>
+            </div>
+            <div class="bubble-menu-divider"></div>
+            <div class="bubble-menu-item" onclick="triggerMenuAction('deleteSingle')">
+                <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>删除</span>
+            </div>
+        `;
+        menu.innerHTML = menuHtml;
         menu.style.display = 'flex';
-        const menuWidth = 190;
+
+        const menuWidth = role === 'char' ? 190 : 155;
         let left = rect.left + rect.width / 2 - menuWidth / 2;
         let top = rect.top - 46;
 
@@ -7082,12 +7367,27 @@ Do NOT alter this syntax so the system can render the quote block cleanly.
 
     async function confirmDeleteSelectedMessages() {
         if (selectedMsgIndices.size === 0) return exitMultiSelectMode();
-        showGlassConfirm("批量删除", `确定删除选中的 ${selectedMsgIndices.size} 条消息吗？`, async () => {
+        showGlassConfirm("批量删除", `确定删除选中的 ${selectedMsgIndices.size} 条气泡消息吗？`, async () => {
             const history = allChatHistories[currentChatChar.id] || [];
-            allChatHistories[currentChatChar.id] = history.filter((_, idx) => !selectedMsgIndices.has(idx));
+            
+            // 按从后往前的顺序精准剔除单条气泡
+            for (let m = history.length - 1; m >= 0; m--) {
+                const msg = history[m];
+                if (Array.isArray(msg.bubbles)) {
+                    for (let b = msg.bubbles.length - 1; b >= 0; b--) {
+                        if (selectedMsgIndices.has(`${m}_${b}`)) {
+                            msg.bubbles.splice(b, 1);
+                        }
+                    }
+                    if (msg.bubbles.length === 0) {
+                        history.splice(m, 1);
+                    }
+                }
+            }
+
             await syncSaveChatData();
             exitMultiSelectMode();
-            showGlassAlert("已删除", "所选消息已彻底清空。");
+            showGlassAlert("已删除", "所选单条气泡已清除！");
         });
     }
 
@@ -8125,6 +8425,43 @@ ${worldBookContext ? `[WorldBook Setting Context]:\n${worldBookContext}\n` : ''}
     function closeCharMonologueModal() {
         document.getElementById('charMonologueModal').classList.remove('open');
         activeMonologueMsgIdx = -1;
+    }
+
+    function switchMonoView(view) {
+        document.getElementById('monoTab_current').classList.toggle('active', view === 'current');
+        document.getElementById('monoTab_history').classList.toggle('active', view === 'history');
+        document.getElementById('monoView_current').style.display = view === 'current' ? 'flex' : 'none';
+        document.getElementById('monoView_history').style.display = view === 'history' ? 'flex' : 'none';
+        if (view === 'history') renderMonoHistoryList();
+    }
+
+    function renderMonoHistoryList() {
+        const container = document.getElementById('monoHistoryListContainer');
+        container.innerHTML = '';
+        if (!currentChatChar) return;
+
+        const history = allChatHistories[currentChatChar.id] || [];
+        const thoughts = [];
+        history.forEach((msg, idx) => {
+            if (msg.role === 'char' && msg.thinking) {
+                thoughts.unshift({ idx, text: msg.thinking, time: new Date(msg.timestamp).toLocaleTimeString() });
+            }
+        });
+
+        if (thoughts.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding: 20px; font-size: 11px; color: var(--text-tertiary);">暂无历史心声记录</div>`;
+            return;
+        }
+
+        thoughts.forEach((item, tIdx) => {
+            const card = document.createElement('div');
+            card.style.cssText = "background: #ededf0; border-radius: 10px; padding: 8px 10px; font-size: 11px; color: #28292c; line-height: 1.45;";
+            card.innerHTML = `
+                <div style="font-size: 9.5px; color: var(--text-tertiary); margin-bottom: 2px;">#${thoughts.length - tIdx} · ${item.time}</div>
+                <div>${item.text}</div>
+            `;
+            container.appendChild(card);
+        });
     }
 
     // 修改当前弹出的心声
@@ -9214,9 +9551,18 @@ ${worldBookContext ? `[WorldBook Setting Context]:\n${worldBookContext}\n` : ''}
         document.getElementById('thoughtsModal').classList.remove('open');
     }
 
-    // 点击 Dock 栏“公告”App 随时唤起查看
-    function openAnnouncementModal() {
-        document.getElementById('thoughtsModal').classList.add('open');
+    // 打开/关闭全屏公告 App
+    function openAnnouncementScreen() {
+        document.getElementById('announcementScreenOverlay').classList.add('open');
+    }
+    function closeAnnouncementScreen() {
+        document.getElementById('announcementScreenOverlay').classList.remove('open');
+    }
+    function switchAnnounceTab(tab) {
+        document.getElementById('annTabBtn_thoughts').classList.toggle('active', tab === 'thoughts');
+        document.getElementById('annTabBtn_disclaimer').classList.toggle('active', tab === 'disclaimer');
+        document.getElementById('annPane_thoughts').style.display = tab === 'thoughts' ? 'flex' : 'none';
+        document.getElementById('annPane_disclaimer').style.display = tab === 'disclaimer' ? 'flex' : 'none';
     }
 
     // 页面加载时自动检测是否首次进入
